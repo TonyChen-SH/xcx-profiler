@@ -10,6 +10,8 @@ use XcxProfiler\Filter\FilterIsSpecifiedExtensionFile;
 use XcxProfiler\Filter\FilterNotRef;
 use XcxProfiler\Filter\FilterSizeGreaterThan;
 use XcxProfiler\Sort\OrderBySize;
+use function flush;
+use function ob_flush;
 
 /**
  * 启动类
@@ -56,12 +58,15 @@ class Bootstrap {
                 continue;
             }
 
-            $fileList[] = $file;
+            echo 'name:' . $file->getName() . ' size:' . $file->getKbSize() . 'kb <br>';
+            ob_flush();
+            flush();
+            // $fileList[] = $file;
         }
 
-        $fileList = (new OrderBySize($fileList))->sort();
-        foreach ($fileList as $file) {
-            echo 'name:' . $file->getName() . ' size:' . $file->getKbSize() . "kb \n";
-        }
+        // $fileList = (new OrderBySize($fileList))->sort();
+        // foreach ($fileList as $file) {
+        //     echo 'name:' . $file->getName() . ' size:' . $file->getKbSize() . "kb \n";
+        // }
     }
 }
