@@ -1,0 +1,16 @@
+/*body {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}*/
+
+.container {
+    max-width: 1024px;
+    margin: auto;
+    background: white;
+    padding: 10px;
+}
+
+.scanType {
+    margin: 10px 10px;
+}

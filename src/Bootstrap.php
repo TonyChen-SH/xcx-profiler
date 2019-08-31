@@ -22,6 +22,10 @@ class Bootstrap {
 
     }
 
+    public function scan(string $fullPath, string $scanType): void {
+        $this->showAllNotRefImage($fullPath);
+    }
+
     public function showAllFile(string $fullPath): void {
         // 过滤器
         $filter = new FilterSizeGreaterThan(3);

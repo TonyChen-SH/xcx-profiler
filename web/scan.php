@@ -8,4 +8,5 @@ use XcxProfiler\Bootstrap;
 include __DIR__ . '/../vendor/autoload.php';
 
 $scanPath = $_GET['scanPath'];
-(new Bootstrap())->showAllNotRefImage($scanPath);
+$scanType = $_GET['scanType'];
+(new Bootstrap())->scan($scanPath, $scanType);
