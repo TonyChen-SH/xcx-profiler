@@ -11,11 +11,12 @@ use function file_get_contents;
 use function strpos;
 
 /**
- * 没有被引用的本地图片
- * Class NotRefImage
+ * 没有被引用
+ *    需要配合png/gif/js等过滤出来的文件类型使用
+ * Class FilterNotRef
  * @package XcxProfiler\Filter
  */
-class FilterNotRefLocalImage extends Filter {
+class FilterNotRef extends Filter {
     /**
      * @var string
      */
@@ -25,11 +26,7 @@ class FilterNotRefLocalImage extends Filter {
         $this->refAtPath = $refAtPath;
     }
 
-    public function doFilter(File $file): bool {
-        if ($file->getExtension() !== 'png' && $file->getExtension() !== 'jpg') {
-            return false;
-        }
-
+    public function accept(File $file): bool {
         $refFileList = Utils::getCodeFileList($this->refAtPath);
         foreach ($refFileList as $refFile) {
             $text = file_get_contents($refFile->getName());
@@ -43,11 +40,10 @@ class FilterNotRefLocalImage extends Filter {
             }
         }
 
-        // 让下一个过滤器，继续做处理
-        if ($this->hasNextFilter()) {
-            return $this->getNextFilter()->doFilter($file);
+        // 如果没有子过滤器，就直接返回
+        if (!$this->hasNextFilter()) {
+            return true;
         }
-
-        return true;
+        return $this->getNextFilter()->accept($file);
     }
 }

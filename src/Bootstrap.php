@@ -6,7 +6,8 @@
 namespace XcxProfiler;
 
 use XcxProfiler\Filter\FilterIgnoreFile;
-use XcxProfiler\Filter\FilterNotRefLocalImage;
+use XcxProfiler\Filter\FilterIsSpecifiedExtensionFile;
+use XcxProfiler\Filter\FilterNotRef;
 use XcxProfiler\Filter\FilterSizeGreaterThan;
 use XcxProfiler\Sort\OrderBySize;
 
@@ -23,11 +24,11 @@ class Bootstrap {
         // 过滤器
         $filter = new FilterSizeGreaterThan(3);
         $filter->setNextFilter(new FilterIgnoreFile(FilterIgnoreFile::FILE_TYPE_GIT))
-               ->setNextFilter(new FilterNotRefLocalImage($fullPath));
+               ->setNextFilter(new FilterNotRef($fullPath));
         $allFileList = ScanDir::getInstance($fullPath)->getAllFile();
         $fileList    = [];
         foreach ($allFileList as $file) {
-            if (!$filter->doFilter($file)) {
+            if (!$filter->accept($file)) {
                 continue;
             }
 
@@ -43,11 +44,15 @@ class Bootstrap {
     // 所有未被引用的图片
     public function showAllNotRefImage(string $fullPath): void {
         // 过滤器
-        $filter      = new FilterNotRefLocalImage($fullPath);
+        $filter = new FilterIsSpecifiedExtensionFile(
+            FilterIsSpecifiedExtensionFile::FILE_TYPE_PNG |
+            FilterIsSpecifiedExtensionFile::FILE_TYPE_JPG
+        );
+        $filter->setNextFilter(new FilterNotRef($fullPath));
         $allFileList = ScanDir::getInstance($fullPath)->getAllFile();
         $fileList    = [];
         foreach ($allFileList as $file) {
-            if (!$filter->doFilter($file)) {
+            if (!$filter->accept($file)) {
                 continue;
             }
 

@@ -5,7 +5,7 @@
 
 namespace XcxProfiler;
 
-use XcxProfiler\Filter\FilterHasFile;
+use XcxProfiler\Filter\FilterIsSpecifiedExtensionFile;
 
 /**
  * 工具类
@@ -20,14 +20,16 @@ class Utils {
      */
     public static function getCodeFileList(string $fullPath): array {
         $allFileList = ScanDir::getInstance($fullPath)->getAllFile();
-        $filter      = new FilterHasFile(FilterHasFile::FILE_TYPE_JS);
-        $filter->setNextFilter(new FilterHasFile(FilterHasFile::FILE_TYPE_JSON))
-               ->setNextFilter(new FilterHasFile(FilterHasFile::FILE_TYPE_WXML))
-               ->setNextFilter(new FilterHasFile(FilterHasFile::FILE_TYPE_WXSS));
+        $filter      = new FilterIsSpecifiedExtensionFile(
+            FilterIsSpecifiedExtensionFile::FILE_TYPE_JS |
+            FilterIsSpecifiedExtensionFile::FILE_TYPE_JSON |
+            FilterIsSpecifiedExtensionFile::FILE_TYPE_WXML |
+            FilterIsSpecifiedExtensionFile::FILE_TYPE_WXSS
+        );
 
         $fileList = [];
         foreach ($allFileList as $file) {
-            if (!$filter->doFilter($file)) {
+            if (!$filter->accept($file)) {
                 continue;
             }
             $fileList[] = $file;
