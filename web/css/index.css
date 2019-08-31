@@ -1,16 +1,46 @@
-/*body {
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-}*/
+body {
+    font-size: 13px !important;
+}
 
 .container {
-    max-width: 1024px;
+    width: 1024px;
     margin: auto;
     background: white;
     padding: 10px;
 }
 
-.scanType {
-    margin: 10px 10px;
+.scan {
+    float: right;
+    height: 36px;
+    line-height: 36px;
+}
+
+.scanButton {
+    display: inline-block;
+    min-width: 100px;
+}
+
+.scanType label {
+    cursor: pointer;
+    border: 1px solid #00acc1;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 5px;
+    min-width: 140px;
+    padding: 0 5px 0 0;
+
+    /*background-color: #26a69a;*/
+    /*color: #ffffff !important;*/
+}
+
+[type="radio"]:not(:checked) + span,
+[type="radio"]:checked + span {
+    padding-left: 25px !important;
+    font-size: 13px;
+}
+
+#profiler {
+    height: 600px;
+    width: 1024px;
 }

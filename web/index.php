@@ -6,48 +6,58 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="css/materialize.css">
     <link rel="stylesheet" href="css/index.css">
     <script src="js/vue.js"></script>
 </head>
 <body>
 <div class="container" id="app">
     <div id="header">
-        我的头部
+        <!--        我的头部-->
     </div>
     <div id="panel">
         <div class="tools">
-            <div style="display: inline-block">
-                <span class="scanType">
-                    <input type="radio" id="imageNotRef" value="imageNotRef" v-model="scanType">
-                    <label for="imageNotRef">未使用的图片</label>
-                </span>
-                <span class="scanType">
-                    <input type="radio" id="jsNotRef" value="jsNotRef" v-model="scanType">
-                     <label for="jsNotRef">未使用的JS</label>
-                </span>
-                <span class="scanType">
-                    <input type="radio" id="imageNotUploadToRemote"
-                           value="imageNotUploadToRemote" v-model="scanType">
-                    <label for="imageNotUploadToRemote">图片未上传至远端</label>
-                </span>
-                <span class="scanType">
-                    <input type="radio" id="customize" value="customize" v-model="scanType">
-                    <label for="customize">自定义</label>
-                </span>
-            </div>
-            <div style="display: inline-block">
-                <input type="button" value="扫描" @click="scan()">
-            </div>
+            <span class="scanType">
+                <label>
+                    <input type="radio" class="with-gap" value="imageNotRef" v-model="scanType">
+                    <span>未使用的图片</span>
+                </label>
+            </span>
+            <span class="scanType">
+                 <label>
+                    <input type="radio" class="with-gap" value="jsNotRef" v-model="scanType">
+                    <span>未使用的JS</span>
+                </label>
+            </span>
+            <span class="scanType">
+                <label>
+                    <input type="radio" class="with-gap" value="imageNotUploadToRemote" v-model="scanType">
+                    <span>图片未上传至远端</span>
+                </label>
+            </span>
+            <span class="scanType">
+                 <label>
+                    <input type="radio" class="with-gap" value="customize" v-model="scanType">
+                    <span>自定义</span>
+                </label>
+            </span>
+            <span class="scan">
+                <button class="scanButton waves-effect waves-light btn" @click="scan()">扫描</button>
+            </span>
         </div>
         <div class="path">
             <label for="">
-                路径 <input type="text" name="scanPath" placeholder="输入项目完整路径" v-model="scanPath" style="width: 700px">
-            </label>
+                <label>
+                    <span>路径</span>
 
+                    <input placeholder="输入项目完整路径" id="first_name" type="text" v-model="scanPath" style="width: 700px">
+                </label>
+
+            </label>
         </div>
         <div class="output">
             <div>
-                <iframe id="profiler" width="1000" height="600"></iframe>
+                <iframe id="profiler"></iframe>
             </div>
             <div>
             <span>
