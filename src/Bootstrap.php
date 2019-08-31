@@ -53,16 +53,19 @@ class Bootstrap {
         $filter->setNextFilter(new FilterNotRef($fullPath));
         $allFileList = ScanDir::getInstance($fullPath)->getAllFile();
         $fileList    = [];
+        echo '开始扫描: <br>';
         foreach ($allFileList as $file) {
             if (!$filter->accept($file)) {
                 continue;
             }
 
-            echo 'name:' . $file->getName() . ' size:' . $file->getKbSize() . 'kb <br>';
+            // echo 'name:' . $file->getName() . ' size:' . $file->getKbSize() . 'kb <br>';
+            echo $file->getKbSize() . 'kb &nbsp;&nbsp;&nbsp;&nbsp;' . $file->getName() . '<br>';
             ob_flush();
             flush();
             // $fileList[] = $file;
         }
+        echo '扫描结束!';
 
         // $fileList = (new OrderBySize($fileList))->sort();
         // foreach ($fileList as $file) {
