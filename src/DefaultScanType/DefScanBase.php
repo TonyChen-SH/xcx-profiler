@@ -3,13 +3,18 @@
  * Author: Tony Chen
  */
 
-namespace XcxProfiler\DefScanType;
+namespace XcxProfiler\DefaultScanType;
 
 use XcxProfiler\File;
 use XcxProfiler\Filter\Filter;
 use function flush;
 use function ob_flush;
 
+/**
+ * 扫描抽象类
+ * Class DefScanBase
+ * @package XcxProfiler\DefScanType
+ */
 abstract class DefScanBase {
     /**
      * 指定的扫描路径

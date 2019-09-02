@@ -5,8 +5,8 @@
 
 namespace XcxProfiler;
 
-use XcxProfiler\DefScanType\ImageNotRef;
-use XcxProfiler\DefScanType\ImageNotUploadToRemote;
+use XcxProfiler\DefaultScanType\ImageNotRef;
+use XcxProfiler\DefaultScanType\ImageNotUploadToRemote;
 use XcxProfiler\Filter\FilterIgnoreFile;
 use XcxProfiler\Filter\FilterNotRef;
 use XcxProfiler\Filter\FilterSizeGreaterThan;
