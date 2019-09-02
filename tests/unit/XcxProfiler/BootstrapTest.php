@@ -13,6 +13,6 @@ class BootstrapTest extends Unit {
     }
 
     public function testShowAllNotRefImage(): void {
-        (new Bootstrap())->showAllNotRefImage('/Users/chendan/Project/work-jooj/baodao_member_plus');
+        (new Bootstrap())->showAllNotRefImage('/usr/local/var/www/company/xingchuang/baodao_member_plus');
     }
 }

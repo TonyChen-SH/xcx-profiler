@@ -8,7 +8,7 @@ use XcxProfiler\ScanDir;
 
 class RecursiveDirTest extends Unit {
     public function testGetAll(): void {
-        $list = ScanDir::getInstance('/tpm/')->getAllFile();
+        $list = ScanDir::getInstance('/usr/local/var/www/company/xingchuang/baodao_member_plus')->getAllFile();
         self::assertGreaterThan(0, count($list));
     }
 
