@@ -66,7 +66,9 @@
             </div>
         </div>
     </div>
-    <div id="footer">我是底部</div>
+    <div id="footer">
+        <!--        我是底部-->
+    </div>
 </div>
 </body>
 <script>
