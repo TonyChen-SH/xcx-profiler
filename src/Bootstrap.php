@@ -27,7 +27,7 @@ class Bootstrap {
                 $this->showAllNotRefImage($fullPath);
                 break;
             case 'imageNotUploadToRemote':
-                $this->notUploadToRemote($fullPath);
+                $this->imageNotUploadToRemote($fullPath);
                 break;
         }
     }
@@ -36,7 +36,7 @@ class Bootstrap {
      * 图片未上传至远端
      * @param string $fullPath
      */
-    public function notUploadToRemote(string $fullPath): void {
+    public function imageNotUploadToRemote(string $fullPath): void {
         (new ImageNotUploadToRemote($fullPath))->scan();
     }
 
