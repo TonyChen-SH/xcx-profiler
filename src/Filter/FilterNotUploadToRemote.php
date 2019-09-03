@@ -26,17 +26,11 @@ class FilterNotUploadToRemote extends Filter{
             if (empty($text)) {
                 continue;
             }
-            //图片出现的位置
-            $imgStrPosition = strpos($text, $file->getShortName());
-            // 有文件使用这个图片
-            if ($imgStrPosition) {
-                $httpStrPosition = strrpos(substr($text,0,$imgStrPosition),'http');
-                if ($httpStrPosition){
-                   $imgUrl = substr($text,$httpStrPosition,($imgStrPosition+strlen($file->getShortName()))-$httpStrPosition);
-                   $imgText = @file_get_contents($imgUrl);
-                   if (!empty($imgText)){
-                       return false;
-                   }
+
+            // 有文件使用这个图片并且上传到远端
+            if (strpos($text, $file->getShortName())) {
+                if (Utils::isUploadToRemote($text,$file)){
+                    return false;
                 }
             }
         }

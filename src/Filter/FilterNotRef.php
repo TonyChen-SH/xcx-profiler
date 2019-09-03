@@ -34,9 +34,11 @@ class FilterNotRef extends Filter {
                 continue;
             }
 
-            // 有文件使用这个图片
+            // 有文件使用这个图片并且使用的不是远端资源
             if (strpos($text, $file->getShortName())) {
-                return false;
+                if (!Utils::isUploadToRemote($text,$file)){
+                    return false;
+                }
             }
         }
 
