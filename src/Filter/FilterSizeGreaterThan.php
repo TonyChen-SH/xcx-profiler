@@ -32,17 +32,16 @@ class FilterSizeGreaterThan extends Filter {
      * @param File $file
      * @return bool
      */
-    public function doFilter(File $file): bool {
+    public function accept(File $file): bool {
         // 文件尺寸小于指定的最大尺寸
-        if ($file->getKbSize() <= $this->greaterThanSize) {
+        if ($file->getKbSize() < $this->greaterThanSize) {
             return false;
         }
 
-        // 让下一个过滤器，继续做处理
-        if ($this->hasNextFilter()) {
-            return $this->getNextFilter()->doFilter($file);
+        // 如果没有子过滤器，就直接返回
+        if (!$this->hasNextFilter()) {
+            return true;
         }
-
-        return true;
+        return $this->getNextFilter()->accept($file);
     }
 }

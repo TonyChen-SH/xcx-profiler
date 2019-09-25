@@ -25,18 +25,19 @@ class FilterIgnoreFile extends Filter {
         $this->fileNameContain = $fileNameContain;
     }
 
-    public function doFilter(File $file): bool {
-        // 是git文件
+    /**
+     * @inheritDoc
+     */
+    public function accept(File $file): bool {
+        // 文件名中包含指定名称,就不接受
         if (strpos($file->getName(), $this->fileNameContain)) {
             return false;
         }
-
-        // 不是git文件就走下一个
-        // 让下一个过滤器，继续做处理
-        if ($this->hasNextFilter()) {
-            return $this->getNextFilter()->doFilter($file);
+        // 如果没有子过滤器，就直接返回
+        if (!$this->hasNextFilter()) {
+            return true;
         }
 
-        return true;
+        return $this->getNextFilter()->accept($file);
     }
 }

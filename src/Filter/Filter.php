@@ -9,6 +9,9 @@ use XcxProfiler\File;
 
 /**
  * 过滤器
+ *   每个子过滤器连起来的链，都是且的关系. 意思就是说, 文件要满足链上的每个节点条件，才能算符合条件
+ *   如： A->B->C ， 那么文件必须同时符合A/B/C 3个规则才算符合条件
+ *       执行的顺序是: 满足A条件，才会执行B条件;满足条件B，才会执行C条件;满足条件C，才会所有的条件都满足
  * Class Filter
  * @package XcxProfiler\Filter
  */
@@ -25,7 +28,7 @@ abstract class Filter {
 
     public function setNextFilter(Filter $nextFilter): self {
         $this->nextFilter = $nextFilter;
-        return $this->nextFilter;
+        return $nextFilter;
     }
 
     public function hasNextFilter(): bool {
@@ -33,9 +36,9 @@ abstract class Filter {
     }
 
     /**
-     * 开始过滤
+     * 是否接受(保留)这个文件
      * @param File $file
      * @return bool
      */
-    abstract public function doFilter(File $file): bool;
+    abstract public function accept(File $file): bool;
 }
